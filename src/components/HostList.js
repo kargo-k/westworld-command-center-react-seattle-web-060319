@@ -6,6 +6,7 @@ const HostList = (props) => {
 
   return (
     <Card.Group itemsPerRow={9}>
+      {/* only shoes the hosts that are decommissioned in the cold storage */}
       {props.hosts.map(host => !host.active ? <Host host={host} key={host.id} handleSelectHost={props.handleSelectHost} selectedHost={props.selectedHost} /> : null)}
     </Card.Group>
   )

@@ -7,7 +7,6 @@ import LogPanel from './LogPanel';
 
 
 class Headquarters extends Component {
-  // Remember, there's many ways to do this. This doesn't have to be a class component. It's up to you.
 
   render() {
     return (

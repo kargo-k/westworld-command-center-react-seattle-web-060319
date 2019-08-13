@@ -4,10 +4,10 @@ import { Segment, Button } from 'semantic-ui-react';
 const LogPanel = ({ isAllActive, activateAll, logs }) => {
 
   // const dummyLogs = () => {
-  //   // This is just to show you how this should work. But where should the log data actually get stored?
-  //   // And where should we be creating logs in the first place?
-  //   // Use the Log Service class (located in: 'src/services/Log') we've created anywhere you like.
-  //   // Just remember to import it
+  // This is just to show you how this should work. But where should the log data actually get stored?
+  // And where should we be creating logs in the first place?
+  // Use the Log Service class (located in: 'src/services/Log') we've created anywhere you like.
+  // Just remember to import it
 
   //   let logs = []
 
@@ -20,6 +20,7 @@ const LogPanel = ({ isAllActive, activateAll, logs }) => {
 
   return (
     <Segment className="HQComps" id="logPanel">
+      {/* maps over all of the logs in the App's state */}
       <pre>
         {logs.map((log, i) => <p key={i} className={log.type}>{log.msg}</p>)}
       </pre>

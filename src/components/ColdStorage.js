@@ -1,10 +1,10 @@
 import React from 'react';
 import { Segment } from 'semantic-ui-react'
 import HostList from './HostList'
-// import Host from './Host'
 
 const ColdStorage = (props) => {
 
+  // only shows hosts that are decommissioned
   return (
 
     <Segment.Group className="HQComps" >

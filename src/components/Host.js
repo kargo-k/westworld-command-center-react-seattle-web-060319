@@ -4,6 +4,8 @@ import { Card } from 'semantic-ui-react'
 
 const Host = (props) => {
   return (
+    // assigns the "selected" class name to the Card component if the card is the selected host's card
+    // onClick makes the selected card the selected host up in App's state
     <Card
       className={props.selectedHost === props.host ? "host selected" : "host"}
       onClick={(e) => {
