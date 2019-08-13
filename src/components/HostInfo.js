@@ -28,15 +28,16 @@ class HostInfo extends Component {
     let area = this.props.areas.filter(area => area.name === value)[0]
     let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
     let log
-
+    // checks if the number of active hosts in the selected area (value) is less than the capacity of the area
     if (numHosts < area.limit) {
-      console.log('inside TRUE of if else')
-      debugger
+      // if there is room for another host, update the host to the selected area
       this.props.updateHostArea(this.props.selectedHost, value)
-
+      // create a log notification and use the addLog fx in props
       log = Log.notify(`${this.props.selectedHost.firstName} set in area ${this.props.selectedHost.area.replace(/_/, " ")}`)
       this.props.addLog(log)
+
     } else {
+      // if there is no room, create an error log
       let log = Log.error(`Too many hosts. Cannot add ${this.props.selectedHost.firstName} to ${this.props.selectedHost.area.replace(/_/, " ")}`)
       this.props.addLog(log)
     }
@@ -46,17 +47,19 @@ class HostInfo extends Component {
     let area = this.props.areas.filter(area => area.name === this.props.selectedHost.area)[0]
     let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
     let log
+    //checks if the number of active hosts in the selected area is less than the capacity of the area
     if (numHosts < area.limit) {
+      // if true, add/remove the host to the area.  handleActivate toggles the active/decommissioned status of the host
       this.props.handleActivate(this.props.selectedHost);
-
+      // based on the isActive property of the host, creates a warning or a notification log
       this.props.selectedHost.active
         ? (log = Log.warn(`Activated ${this.props.selectedHost.firstName}`))
         : (log = Log.notify(`Decommissioned ${this.props.selectedHost.firstName}`))
-
+      // add the log to the state
       this.props.addLog(log)
 
     } else {
-
+      // if there is no room, log an error
       let log = Log.error(`Too many hosts. Cannot add ${this.props.selectedHost.firstName} to ${this.props.selectedHost.area.replace(/_/, " ")}`)
       this.props.addLog(log)
     }
@@ -77,15 +80,15 @@ class HostInfo extends Component {
           <Card>
             <Card.Content>
               <Card.Header>
+                {/* logic for displaying the male/female icon */}
                 {this.props.selectedHost.firstName} | {this.props.selectedHost.gender === 'Male' ? <Icon name='man' /> : <Icon name='woman' />}
               </Card.Header>
               <Card.Meta>
+                {/* logic for radio button values based on attributes of the selected host */}
                 <Radio
                   onChange={this.toggle}
                   label={this.props.selectedHost.active ? "Active" : "Decommissioned"}
-                  /* Sometimes the label should take "Decommissioned". How are we going to conditionally render that? */
                   checked={this.props.selectedHost.active}
-                  /* Checked takes a boolean and determines what position the switch is in. Should it always be true? */
                   slider
                 />
               </Card.Meta>

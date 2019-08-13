@@ -5,6 +5,7 @@ import { Card } from 'semantic-ui-react'
 
 const Area = ({ area, hosts, handleSelectHost, selectedHost }) => {
 
+  // finds all of the hosts that are active in that area
   let areaHosts = hosts.filter(host => (host.area === area.name && host.active) ? host : null)
 
   return (
@@ -15,16 +16,6 @@ const Area = ({ area, hosts, handleSelectHost, selectedHost }) => {
       </Card.Group>
     </div>)
 
-}
-
-Area.propTypes = {
-  hosts: function (props, propName, componentName) {
-    if (props.hosts.length > props.limit) {
-      throw Error(
-        `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
-      )
-    }
-  }
 }
 
 export default Area;
