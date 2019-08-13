@@ -5,7 +5,7 @@ import { Card } from 'semantic-ui-react'
 
 const Area = ({ area, hosts, handleSelectHost }) => {
 
-  let areaHosts = hosts.filter(host => host.area === area.name ? host : null)
+  let areaHosts = hosts.filter(host => (host.area === area.name && host.active) ? host : null)
 
   return (
     <div className='area' id={area.name}>
