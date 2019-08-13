@@ -13,6 +13,7 @@ class App extends Component {
     this.state = {
       hosts: [],
       areas: [],
+      selectedHost: false
     }
   }
 
@@ -23,6 +24,10 @@ class App extends Component {
     fetch(areaAPI)
       .then(res => res.json())
       .then(areas => this.setState({ areas }))
+  }
+
+  handleSelectHost = host => {
+    this.setState({ selectedHost: host })
   }
 
   handleActivate = selectedHost => {
@@ -56,8 +61,17 @@ class App extends Component {
   render() {
     return (
       <Segment id='app'>
-        <WestworldMap areas={this.state.areas} hosts={this.state.hosts} />
-        <Headquarters hosts={this.state.hosts} handleActivate={this.handleActivate} areas={this.state.areas} updateHostArea={this.updateHostArea} />
+        <WestworldMap
+          areas={this.state.areas}
+          hosts={this.state.hosts}
+          handleSelectHost={this.handleSelectHost} />
+        <Headquarters
+          hosts={this.state.hosts}
+          selectedHost={this.state.selectedHost}
+          handleActivate={this.handleActivate}
+          areas={this.state.areas}
+          updateHostArea={this.updateHostArea}
+          handleSelectHost={this.handleSelectHost} />
       </Segment>
     )
   }
