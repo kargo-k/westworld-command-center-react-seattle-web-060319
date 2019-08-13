@@ -1,15 +1,56 @@
 import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
-
+// [
+//   {
+//   id: 1,
+//   name: "high_plains",
+//   limit: 8,
+//   auth_req: false
+//   },
+//   {
+//   id: 2,
+//   name: "lowlands",
+//   limit: 6,
+//   auth_req: false
+//   },
+//   {
+//   id: 3,
+//   name: "under_construction",
+//   limit: 8,
+//   auth_req: true
+//   },
+//   {
+//   id: 4,
+//   name: "pariah",
+//   limit: 14,
+//   auth_req: false
+//   },
+//   {
+//   id: 5,
+//   name: "python_pass",
+//   limit: 14,
+//   auth_req: false
+//   },
+//   {
+//   id: 6,
+//   name: "badlands",
+//   limit: 10,
+//   auth_req: false
+//   }
+//   ]
 
 class HostInfo extends Component {
   state = {
     options: [
-      { key: "some_area", text: "Some Area", value: "some_area" },
-      { key: "another_area", text: "Another Area", value: "another_area" }
+      { key: 1, text: "High Plains", value: "high_plains" },
+      { key: 2, text: "Lowlands", value: "lowlands" },
+      { key: 3, text: "Under Construction", value: "under_construction" },
+      { key: 4, text: "Pariah", value: "pariah" },
+      { key: 5, text: "Python Pass", value: "python_pass" },
+      { key: 6, text: "Badlands", value: "badlands" }
     ],
-    value: "some_area"
+    value: this.props.selectedHost.area
     // This state is just to show how the dropdown component works.
     // Options have to be formatted in this way (array of objects with keys of: key, text, value)
     // Value has to match the value in the object to render the right text.
@@ -23,6 +64,8 @@ class HostInfo extends Component {
     // the 'value' attribute is given via Semantic's Dropdown component.
     // Put a debugger in here and see what the "value" variable is when you pass in different options.
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
+    console.log(value)
+    this.props.updateHostArea(this.props.selectedHost, value)
   }
 
   toggle = () => {
@@ -56,13 +99,12 @@ class HostInfo extends Component {
                   slider
                 />
               </Card.Meta>
-
               <Divider />
               Current Area:
               <Dropdown
                 onChange={this.handleChange}
                 value={this.props.selectedHost.area}
-                options={this.props.areas}
+                options={this.state.options}
                 selection
               />
             </Card.Content>

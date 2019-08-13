@@ -23,7 +23,7 @@ class Headquarters extends Component {
 
         </Grid.Column>
         <Grid.Column width={5}>
-          <Details selectedHost={this.state.selectedHost} handleActivate={this.props.handleActivate} areas={this.props.areas} />
+          <Details selectedHost={this.state.selectedHost} handleActivate={this.props.handleActivate} areas={this.props.areas} updateHostArea={this.props.updateHostArea} />
         </Grid.Column>
         <Grid.Column width={3}>
 

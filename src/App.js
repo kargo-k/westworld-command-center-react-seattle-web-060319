@@ -26,7 +26,6 @@ class App extends Component {
   }
 
   handleActivate = selectedHost => {
-    console.log('inside activate! activate host pls')
     selectedHost.active = !selectedHost.active
     this.setState(prevState => {
       let updatedHosts = prevState.hosts.map(host => {
@@ -40,12 +39,25 @@ class App extends Component {
     })
   }
 
+  updateHostArea = (selectedHost, value) => {
+    selectedHost.area = value
+    this.setState(prevState => {
+      let updatedHosts = prevState.hosts.map(host => {
+        if (host.id === selectedHost.id) {
+          return selectedHost
+        } else {
+          return host
+        }
+      })
+      return { selectedHost: selectedHost, hosts: updatedHosts }
+    })
+  }
 
   render() {
     return (
       <Segment id='app'>
         <WestworldMap areas={this.state.areas} />
-        <Headquarters hosts={this.state.hosts} handleActivate={this.handleActivate} areas={this.state.areas} />
+        <Headquarters hosts={this.state.hosts} handleActivate={this.handleActivate} areas={this.state.areas} updateHostArea={this.updateHostArea} />
       </Segment>
     )
   }
