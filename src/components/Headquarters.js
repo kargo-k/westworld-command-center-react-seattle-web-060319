@@ -14,7 +14,10 @@ class Headquarters extends Component {
       <Grid celled='internally'>
         <Grid.Column width={8}>
 
-          <ColdStorage hosts={this.props.hosts} handleSelectHost={this.props.handleSelectHost} />
+          <ColdStorage
+            hosts={this.props.hosts}
+            handleSelectHost={this.props.handleSelectHost}
+            selectedHost={this.props.selectedHost} />
 
         </Grid.Column>
         <Grid.Column width={5}>

@@ -64,7 +64,8 @@ class App extends Component {
         <WestworldMap
           areas={this.state.areas}
           hosts={this.state.hosts}
-          handleSelectHost={this.handleSelectHost} />
+          handleSelectHost={this.handleSelectHost}
+          selectedHost={this.state.selectedHost} />
         <Headquarters
           hosts={this.state.hosts}
           selectedHost={this.state.selectedHost}

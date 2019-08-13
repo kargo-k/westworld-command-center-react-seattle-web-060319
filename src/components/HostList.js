@@ -6,7 +6,7 @@ const HostList = (props) => {
 
   return (
     <Card.Group itemsPerRow={9}>
-      {props.hosts.map(host => !host.active ? <Host host={host} key={host.id} handleSelectHost={props.handleSelectHost} /> : null)}
+      {props.hosts.map(host => !host.active ? <Host host={host} key={host.id} handleSelectHost={props.handleSelectHost} selectedHost={props.selectedHost} /> : null)}
     </Card.Group>
   )
 }
