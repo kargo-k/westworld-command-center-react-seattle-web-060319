@@ -1,44 +1,6 @@
 import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
-// [
-//   {
-//   id: 1,
-//   name: "high_plains",
-//   limit: 8,
-//   auth_req: false
-//   },
-//   {
-//   id: 2,
-//   name: "lowlands",
-//   limit: 6,
-//   auth_req: false
-//   },
-//   {
-//   id: 3,
-//   name: "under_construction",
-//   limit: 8,
-//   auth_req: true
-//   },
-//   {
-//   id: 4,
-//   name: "pariah",
-//   limit: 14,
-//   auth_req: false
-//   },
-//   {
-//   id: 5,
-//   name: "python_pass",
-//   limit: 14,
-//   auth_req: false
-//   },
-//   {
-//   id: 6,
-//   name: "badlands",
-//   limit: 10,
-//   auth_req: false
-//   }
-//   ]
 
 class HostInfo extends Component {
   state = {
@@ -58,17 +20,29 @@ class HostInfo extends Component {
     // IMPORTANT: But whether it should be stateful or not is entirely up to you. Change this component however you like.
   }
 
-
-
   handleChange = (e, { value }) => {
     // the 'value' attribute is given via Semantic's Dropdown component.
     // Put a debugger in here and see what the "value" variable is when you pass in different options.
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
-    this.props.updateHostArea(this.props.selectedHost, value)
+    let area = this.props.areas.filter(area => area.name === this.props.selectedHost.area)[0]
+    let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
+    if (numHosts < area.limit) {
+      this.props.updateHostArea(this.props.selectedHost, value)
+    } else {
+      // TODO throw error
+      console.log('cannot add host to this area')
+    }
   }
 
   toggle = () => {
-    this.props.handleActivate(this.props.selectedHost);
+    let area = this.props.areas.filter(area => area.name === this.props.selectedHost.area)[0]
+    let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
+    if (numHosts < area.limit) {
+      this.props.handleActivate(this.props.selectedHost);
+    } else {
+      // TODO throw error
+      console.log('cannot add host to this area')
+    }
   }
 
   render() {

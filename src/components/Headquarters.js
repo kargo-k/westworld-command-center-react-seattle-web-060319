@@ -22,6 +22,7 @@ class Headquarters extends Component {
         </Grid.Column>
         <Grid.Column width={5}>
           <Details
+            hosts={this.props.hosts}
             selectedHost={this.props.selectedHost}
             handleActivate={this.props.handleActivate}
             areas={this.props.areas}
