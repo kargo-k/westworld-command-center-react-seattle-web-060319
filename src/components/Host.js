@@ -8,8 +8,8 @@ const Host = (props) => {
     <Card
       className="host"
       onClick={(e) => {
-        // FIXME: styling for selected host
-        e.target.className = "ui image host selected"
+        // FIXME: styling for selected host to remove selected class after selection of a different host
+        e.target.parentNode.classList.value += ' selected'
         props.handleSelectHost(props.host)
       }}
       image={props.host.imageUrl}
