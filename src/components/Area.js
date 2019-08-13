@@ -1,20 +1,25 @@
 import React from 'react';
 import '../stylesheets/Area.css'
+import Host from './Host';
+import { Card } from 'semantic-ui-react'
 
-const Area = () => (
+const Area = ({ area, hosts }) => {
 
-  <div className='area' id={/* Pass in the area name here to make sure this is styled correctly */}>
-    <h3 className='labels'>{/* Don't just pass in the name from the data...clean that thing up */}</h3>
+  let areaHosts = hosts.filter(host => host.area === area.name ? host : null)
 
-    {/* See Checkpoint 1 item 2 in the Readme for a clue as to what goes here */}
+  return (
+    <div className='area' id={area.name}>
+      <h3 className='labels'>{area.name.replace(/_/, " ")}</h3>
+      <Card.Group itemsPerRow={3}>
+        {areaHosts.map(host => <Host host={host} key={host.id} />)}
+      </Card.Group>
+    </div>)
 
-  </div>
-
-)
+}
 
 Area.propTypes = {
-  hosts: function(props, propName, componentName){
-    if(props.hosts.length > props.limit){
+  hosts: function (props, propName, componentName) {
+    if (props.hosts.length > props.limit) {
       throw Error(
         `HEY!! You got too many hosts in ${props.name}. The limit for that area is ${props.limit}. You gotta fix that!`
       )
