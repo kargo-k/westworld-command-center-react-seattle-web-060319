@@ -29,7 +29,7 @@ const LogPanel = ({ isAllActive, activateAll }) => {
       <Button
         fluid
         color={isAllActive ? "red" : "green"}
-        content={isAllActive ? "DEACTIVATE ALL" : "ACTIVATE ALL"}
+        content={isAllActive ? "DECOMMISSION ALL" : "ACTIVATE ALL"}
         onClick={activateAll}
       />
     </Segment>
