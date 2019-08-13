@@ -31,7 +31,7 @@ class Headquarters extends Component {
         </Grid.Column>
         <Grid.Column width={3}>
 
-          <LogPanel />
+          <LogPanel isAllActive={this.props.isAllActive} activateAll={this.props.activateAll} />
 
         </Grid.Column>
       </Grid>

@@ -13,7 +13,8 @@ class App extends Component {
     this.state = {
       hosts: [],
       areas: [],
-      selectedHost: false
+      selectedHost: false,
+      isAllActive: false
     }
   }
 
@@ -58,6 +59,19 @@ class App extends Component {
     })
   }
 
+  activateAll = () => {
+    console.log('inside activate all')
+    this.setState(prevState => {
+      let isActive = !prevState.isAllActive
+      let updateHosts = [...prevState.hosts]
+      updateHosts = updateHosts.map(host => {
+        host.active = isActive
+        return host
+      })
+      return { hosts: updateHosts, isAllActive: isActive }
+    })
+  }
+
   render() {
     return (
       <Segment id='app'>
@@ -72,7 +86,9 @@ class App extends Component {
           handleActivate={this.handleActivate}
           areas={this.state.areas}
           updateHostArea={this.updateHostArea}
-          handleSelectHost={this.handleSelectHost} />
+          handleSelectHost={this.handleSelectHost}
+          activateAll={this.activateAll}
+          isAllActive={this.state.isAllActive} />
       </Segment>
     )
   }
