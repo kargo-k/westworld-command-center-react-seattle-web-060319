@@ -1,6 +1,7 @@
 import '../stylesheets/HostInfo.css'
 import React, { Component } from 'react'
 import { Radio, Icon, Card, Grid, Image, Dropdown, Divider } from 'semantic-ui-react'
+import { Log } from '../services/Log';
 
 class HostInfo extends Component {
   state = {
@@ -26,22 +27,34 @@ class HostInfo extends Component {
     // See the Semantic docs for more info: https://react.semantic-ui.com/modules/dropdown/#usage-controlled
     let area = this.props.areas.filter(area => area.name === this.props.selectedHost.area)[0]
     let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
+    let log
     if (numHosts < area.limit) {
       this.props.updateHostArea(this.props.selectedHost, value)
+      log = Log.notify(`${this.props.selectedHost.firstName} set in area ${this.props.selectedHost.area.replace(/_/, " ")}`)
+      this.props.addLog(log)
     } else {
-      // TODO throw error
-      console.log('cannot add host to this area')
+      let log = Log.error(`Too many hosts. Cannot add ${this.props.selectedHost.firstName} to ${this.props.selectedHost.area.replace(/_/, " ")}`)
+      this.props.addLog(log)
     }
   }
 
   toggle = () => {
     let area = this.props.areas.filter(area => area.name === this.props.selectedHost.area)[0]
     let numHosts = this.props.hosts.filter(host => host.area === area.name && host.active).length
+    let log
     if (numHosts < area.limit) {
       this.props.handleActivate(this.props.selectedHost);
+
+      this.props.selectedHost.active
+        ? (log = Log.warn(`Activated ${this.props.selectedHost.firstName}`))
+        : (log = Log.notify(`Decommissioned ${this.props.selectedHost.firstName}`))
+
+      this.props.addLog(log)
+
     } else {
-      // TODO throw error
-      console.log('cannot add host to this area')
+
+      let log = Log.error(`Too many hosts. Cannot add ${this.props.selectedHost.firstName} to ${this.props.selectedHost.area.replace(/_/, " ")}`)
+      this.props.addLog(log)
     }
   }
 

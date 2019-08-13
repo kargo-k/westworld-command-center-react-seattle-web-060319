@@ -3,6 +3,7 @@ import './stylesheets/App.css'
 import { Segment } from 'semantic-ui-react';
 import Headquarters from './components/Headquarters'
 import WestworldMap from './components/WestworldMap'
+import { Log } from './services/Log'
 const hostAPI = 'http://localhost:3000/hosts'
 const areaAPI = 'http://localhost:3000/areas'
 
@@ -14,7 +15,8 @@ class App extends Component {
       hosts: [],
       areas: [],
       selectedHost: false,
-      isAllActive: false
+      isAllActive: false,
+      logs: []
     }
   }
 
@@ -62,13 +64,26 @@ class App extends Component {
   activateAll = () => {
     console.log('inside activate all')
     this.setState(prevState => {
+      let log
       let isActive = !prevState.isAllActive
+
+      isActive ? (log = Log.warn('Activating all hosts!')) : (log = Log.notify('Decommissioning all hosts.'))
+      this.addLog(log)
+
       let updateHosts = [...prevState.hosts]
       updateHosts = updateHosts.map(host => {
         host.active = isActive
         return host
       })
       return { hosts: updateHosts, isAllActive: isActive }
+    })
+  }
+
+  addLog = (log) => {
+    this.setState(prevState => {
+      let newLogs = [...prevState.logs]
+      newLogs.unshift(log)
+      return { logs: newLogs }
     })
   }
 
@@ -88,7 +103,9 @@ class App extends Component {
           updateHostArea={this.updateHostArea}
           handleSelectHost={this.handleSelectHost}
           activateAll={this.activateAll}
-          isAllActive={this.state.isAllActive} />
+          isAllActive={this.state.isAllActive}
+          logs={this.state.logs}
+          addLog={this.addLog} />
       </Segment>
     )
   }

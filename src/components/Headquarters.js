@@ -27,11 +27,12 @@ class Headquarters extends Component {
             handleActivate={this.props.handleActivate}
             areas={this.props.areas}
             updateHostArea={this.props.updateHostArea}
-            handleSelectHost={this.props.handleSelectHost} />
+            handleSelectHost={this.props.handleSelectHost}
+            addLog={this.props.addLog} />
         </Grid.Column>
         <Grid.Column width={3}>
 
-          <LogPanel isAllActive={this.props.isAllActive} activateAll={this.props.activateAll} />
+          <LogPanel isAllActive={this.props.isAllActive} activateAll={this.props.activateAll} logs={this.props.logs} />
 
         </Grid.Column>
       </Grid>

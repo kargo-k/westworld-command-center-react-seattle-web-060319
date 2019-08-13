@@ -10,7 +10,13 @@ const Details = (props) => {
 
   const renderSomething = () => props.selectedHost
     ?
-    (<HostInfo selectedHost={props.selectedHost} handleActivate={props.handleActivate} areas={props.areas} updateHostArea={props.updateHostArea} hosts={props.hosts} />)
+    (<HostInfo
+      selectedHost={props.selectedHost}
+      handleActivate={props.handleActivate}
+      areas={props.areas}
+      updateHostArea={props.updateHostArea}
+      hosts={props.hosts}
+      addLog={props.addLog} />)
     :
     (<Image size='medium' src={Images.westworldLogo} />)
 
